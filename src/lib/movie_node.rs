@@ -289,6 +289,62 @@ impl MovieNodeState {
                                 );
                             }
                         }
+                        // --- OPZIONI LOW-LATENCY E TIMING FIX ---
+                        {
+                            let opt = ffi::CString::new("correct-pts").unwrap();
+                            let val = ffi::CString::new("no").unwrap();
+                            unsafe {
+                                libmpv_sys::mpv_set_option_string(
+                                    transmute_copy(&mpv_init),
+                                    opt.as_ptr(),
+                                    val.as_ptr(),
+                                );
+                            }
+                        }
+                        {
+                            let opt = ffi::CString::new("untimed").unwrap();
+                            let val = ffi::CString::new("yes").unwrap();
+                            unsafe {
+                                libmpv_sys::mpv_set_option_string(
+                                    transmute_copy(&mpv_init),
+                                    opt.as_ptr(),
+                                    val.as_ptr(),
+                                );
+                            }
+                        }
+                        {
+                            let opt = ffi::CString::new("container-fps-override").unwrap();
+                            let val = ffi::CString::new("30").unwrap();
+                            unsafe {
+                                libmpv_sys::mpv_set_option_string(
+                                    transmute_copy(&mpv_init),
+                                    opt.as_ptr(),
+                                    val.as_ptr(),
+                                );
+                            }
+                        }
+                        {
+                            let opt = ffi::CString::new("profile").unwrap();
+                            let val = ffi::CString::new("low-latency").unwrap();
+                            unsafe {
+                                libmpv_sys::mpv_set_option_string(
+                                    transmute_copy(&mpv_init),
+                                    opt.as_ptr(),
+                                    val.as_ptr(),
+                                );
+                            }
+                        }
+                        {
+                            let opt = ffi::CString::new("demuxer-lavf-o").unwrap();
+                            let val = ffi::CString::new("fflags=nobuffer").unwrap();
+                            unsafe {
+                                libmpv_sys::mpv_set_option_string(
+                                    transmute_copy(&mpv_init),
+                                    opt.as_ptr(),
+                                    val.as_ptr(),
+                                );
+                            }
+                        }
                         // Look in the radiance resources folder for a mpv.conf file
                         // that will be applied to all MovieNodes
                         // (see https://mpv.io/manual/stable/#configuration-files)
